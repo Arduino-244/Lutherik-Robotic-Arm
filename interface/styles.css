@@ -36,3 +36,31 @@ body {
     font-weight: bold;
     text-align: center;
 }
+
+.subtitle {
+    font-weight: 500;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: 1rem;
+}
+
+#tickmarks {
+    color: black;
+}
+
+input {
+    transition: 0.3s ease-in;
+}
+
+#title-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.bot-logo {
+    position: absolute;
+    left: 0;
+   scale: 0.2;
+}
