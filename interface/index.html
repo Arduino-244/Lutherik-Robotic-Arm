@@ -17,28 +17,28 @@
             <h3 class="subtitle">Lucas, Arthur e João Erik</h3>
         </div>
         <div class="row">
-            <label for="servoRange1" class="form-label">Servo da Base</label>
-            <input type="range" class="form-range" id="servoRange1" value="90" min="0" max="180" oninput="this.nextElementSibling.value = this.value + '°'; moveServo(5, this.value)">
-            <output>90°</output>
+            <label class="form-label">Servo da Base</label>
+            <input type="range" class="form-range" min="0" max="180" onchange="changeServo('bottomServo', value)">
+            <span id="bottomServoValue">90°</span>
         </div>
         <div class="row">
-            <label for="servoRange2" class="form-label">Servo da Vertical</label>
-            <input type="range" class="form-range" id="servoRange2" value="90" min="0" max="180" oninput="this.nextElementSibling.value = this.value + '°'; moveServo(5, this.value)">
-            <output>90°</output>
+            <label class="form-label">Servo da Direita</label>
+            <input type="range" class="form-range" min="0" max="180" onchange="changeServo('rightServo', value)">
+            <span id="rightServoValue">90°</span>
         </div>
         <div class="row">
-            <label for="servoRange3" class="form-label">Servo do Braço</label>
-            <input type="range" class="form-range" id="servoRange3" value="90" min="0" max="180" oninput="this.nextElementSibling.value = this.value + '°'; moveServo(5, this.value)">
-            <output>90°</output>
+            <label class="form-label">Servo da Esquerda</label>
+            <input type="range" class="form-range" min="0" max="180" onchange="changeServo('leftServo', value)">
+            <span id="leftServoValue">90°</span>
         </div>
         <div class="row">
-            <label for="servoRange4" class="form-label">Servo da Garra</label>
-            <input type="range" class="form-range" id="servoRange4" value="90" min="0" max="180" oninput="this.nextElementSibling.value = this.value + '°'; moveServo(5, this.value)">
-            <output>90°</output>
+            <label class="form-label">Servo da Garra</label>
+            <input type="range" class="form-range" min="0" max="180" onchange="changeServo('topServo', value)">
+            <span id="topServoValue">90°</span>
         </div>
     </div>
 
-    <script src="blink.js"></script>
+    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
