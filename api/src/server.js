@@ -1,9 +1,9 @@
-// const five = require("johnny-five");
-// const board = new five.Board({ port: 'COM3' });
+const five = require("johnny-five");
+const board = new five.Board({ port: 'COM3' });
 
-// board.on('ready', () => {
+board.on('ready', () => {
     createServer();
-// });
+});
 
 function createServer() {
     require('dotenv').config();

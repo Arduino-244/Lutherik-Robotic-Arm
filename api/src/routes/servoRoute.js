@@ -7,9 +7,9 @@ router.use(bodyParser.json());
 
 router.get('/moveBottomServo/:degrees', ServoController.moveBottomServo);
 
-router.get('/moveRightServo/:degrees', ServoController.moveRightServo);
+router.get('/moveArmServo/:degrees', ServoController.moveArmServo);
 
-router.get('/moveLeftServo/:degrees', ServoController.moveLeftServo);
+router.get('/moveForearmServo/:degrees', ServoController.moveForearmServo);
 
 router.get('/moveTopServo/:degrees', ServoController.moveTopServo);
 
