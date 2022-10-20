@@ -29,7 +29,6 @@ class ServoController {
         console.log('Bottom', req.params.degrees);
         res.send('Bottom servo');
         servoBottom.to(req.params.degrees)
-
     }
 
     moveArmServo(req, res, next) {
@@ -85,24 +84,25 @@ class ServoController {
     }
 
     stopRecording(req, res, next) {
-        console.log(macro)
-        res.send('stopRecording')
         isRecording = false;
-        let i = 0;
-        let macroSavedLength = macro.length
-        function moveServo() {
+        
+        res.send('stopRecording');
+
+        let index = 0;
+        function runMacro() {
             setTimeout(() => {
                 let currentKey = macro[i]
                 servoBottom.to(currentKey[0]);
                 servoRight.to(currentKey[1]);
                 servoLeft.to(currentKey[2]);
                 servoTop.to(currentKey[3]);
-                i ++;
-                if (i > macroSavedLength) return;
-                moveServo();
+                index ++;
+                if index > macro.length) return;
+                runMacro();
             }, 500);
         }
-        moveServo()
+        
+        runMacro();
     }
 
     reset(req, res, next) {
