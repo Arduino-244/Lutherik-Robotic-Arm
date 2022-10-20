@@ -26,3 +26,16 @@ function claw(state) {
 
     fetch(url, options).then(function (response) {console.log(response);});
 }
+
+function reset() {
+    const url = `http://localhost:3000/reset`;
+    console.log(`URL: ${url}`)
+
+    options = {
+        mode: 'no-cors',
+    };
+
+    window.location.reload()
+
+    fetch(url, options).then(function (response) {console.log(response);});
+}

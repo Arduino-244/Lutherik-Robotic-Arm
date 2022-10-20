@@ -17,4 +17,6 @@ router.get('/openClaw', ServoController.openClaw);
 
 router.get('/closeClaw', ServoController.closeClaw);
 
+router.get('/reset', ServoController.reset);
+
 module.exports = router;

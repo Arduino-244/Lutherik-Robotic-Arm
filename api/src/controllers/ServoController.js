@@ -6,6 +6,8 @@ const servoRight = new five.Servo(9);
 const servoLeft = new five.Servo(10);
 const servoTop = new five.Servo(11);
 
+const servoReset = [ 90, 65, 90, 90 ];
+
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
 const moveRightServo = async (degrees) => {
@@ -60,6 +62,15 @@ class ServoController {
         res.send('Close claw');
         led.off();
         servoTop.min();
+    }
+
+    reset(req, res, next) {
+        res.send('Reset');
+        servoBottom.to(servoReset[0]);
+        servoRight.to(servoReset[1]);
+        servoLeft.to(servoReset[2]);
+        servoTop.to(servoReset[3]);
+        servoBottom.ccw(0);
     }
 
 }
