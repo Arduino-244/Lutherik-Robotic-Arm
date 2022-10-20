@@ -1,3 +1,5 @@
+let isRecording = false;
+
 function changeServoPosition(id, value) {
     const url = `http://localhost:3000/move${id}/${value}`;
     console.log(id, value);
@@ -36,6 +38,22 @@ function reset() {
     };
 
     window.location.reload()
+
+    fetch(url, options).then(function (response) {console.log(response);});
+}
+
+function recordMacro() {
+    isRecording = !isRecording
+
+    const macroButton = document.getElementById("macro-button");
+    macroButton.innerHTML = isRecording && 'Parar Macro' || 'Gravar Macro';
+
+    const url = `http://localhost:3000/${isRecording && 'startRecording' || 'stopRecording'}`;
+    console.log(`URL: ${url}`)
+
+    options = {
+        mode: 'no-cors',
+    };
 
     fetch(url, options).then(function (response) {console.log(response);});
 }

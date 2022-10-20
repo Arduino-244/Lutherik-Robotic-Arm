@@ -10,13 +10,15 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="row" id="title-div">
+        <div class="row mb-5">
+            <img id="logo-etec" src="etec.png" alt="Logotipo Etec Lençóis-Paulista">
+
+            <div class="mt-4 row" id="title-div">
                 <h2 class="title">Robô Lutherik</h2>
             </div>
-            <h3 class="subtitle">Lucas, Arthur e João Erik</h3>
+            <h3 class="mt-3 subtitle">Lucas, Arthur e João Erik</h3>
         </div>
-        <div class="row">
+        <div class="row mt-4">
             <label class="form-label">Servo da Base</label>
             <input type="range" class="form-range" min="0" max="180" 
             onchange="changeServoPosition('BottomServo', value)" oninput="changeServoValue('bottomServo', value)">
@@ -41,15 +43,18 @@
             <span id="topServoValue">90°</span>
         </div>
 
-        <div class="mt-4">
-            <button type="button" class="btn btn-outline-success btn-lg" onclick="claw('open')">Abrir Garra</button>
-            <button type="button" class="btn btn-outline-danger btn-lg" onclick="claw('close')">Fechar Garra</button>
-            <button type="button" class="btn btn-outline-primary btn-lg" onclick="reset()">Reiniciar</button>
+        <div id="macro" class="mt-4">
+            <div id="macro-row-1">
+                <button type="button" class="button btn btn-outline-success" onclick="claw('open')">Abrir Garra</button>
+                <button type="button" class="middle-button button btn btn-outline-danger" onclick="claw('close')">Fechar Garra</button>
+                <button type="button" class="button btn btn-outline-primary" onclick="reset()">Reiniciar</button>
+            </div>
+            <div class="mt-2">
+                <button type="button" id="macro-button" class="btn btn-outline-dark btn-block" onclick="recordMacro()">Gravar Macro</button>
+            </div>
         </div>
 
-        <div class="mt-2">
-            <button type="button" id="macro-button" class="btn btn-outline-dark btn-lg" onclick="recordMacro()">Gravar Macro</button>
-        </div>
+
 
     </div>
 

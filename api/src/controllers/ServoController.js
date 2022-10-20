@@ -20,6 +20,9 @@ const moveLeftServo = async (degrees) => {
     servoLeft.to(degrees);
 }
 
+let isRecording = false;
+let macro = [];
+
 class ServoController {
 
     moveBottomServo(req, res, next) {
@@ -62,6 +65,40 @@ class ServoController {
         res.send('Close claw');
         led.off();
         servoTop.min();
+    }
+
+    startRecording(req, res, next) {
+        isRecording = true;
+        macro = []
+        
+        res.send('startRecording')
+
+        function recordMacroKey() {
+            if (!isRecording) return;
+            setTimeout(function() {
+                macro.push([servoBottom.position, servoRight.position, servoLeft.position, servoTop.position])
+                recordMacroKey();
+            }, 500)
+        }
+
+        recordMacroKey();
+    }
+
+    stopRecording(req, res, next) {
+        res.send('stopRecording')
+        isRecording = false;
+        let i = 0;
+        while (isRecording == false && macro.length > 0) {
+            i++;
+            let currentKey = macro[i]
+            if (currentKey) {
+                servoBottom.to(currentKey[0]);
+                servoRight.to(currentKey[1]);
+                servoLeft.to(currentKey[2]);
+                servoTop.to(currentKey[3]);
+                macro.pop();
+            }
+        }
     }
 
     reset(req, res, next) {

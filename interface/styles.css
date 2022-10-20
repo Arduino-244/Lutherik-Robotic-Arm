@@ -46,12 +46,30 @@ body {
     white-space: nowrap;
 }
 
+#logo-etec {
+    width: 25%;
+}
+
 #tickmarks {
     color: black;
 }
 
-#macro-button {
+#macro {
     width: 30vw;
+}
+
+#macro-button {
+    width: 100%;
+}
+
+#macro-row-1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.middle-button {
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
 input {

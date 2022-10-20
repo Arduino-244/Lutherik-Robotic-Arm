@@ -19,4 +19,8 @@ router.get('/closeClaw', ServoController.closeClaw);
 
 router.get('/reset', ServoController.reset);
 
+router.get('/startRecording', ServoController.startRecording);
+
+router.get('/stopRecording', ServoController.stopRecording);
+
 module.exports = router;
