@@ -70,7 +70,6 @@ class ServoController {
         servoRight.to(servoReset[1]);
         servoLeft.to(servoReset[2]);
         servoTop.to(servoReset[3]);
-        servoBottom.ccw(0);
     }
 
 }

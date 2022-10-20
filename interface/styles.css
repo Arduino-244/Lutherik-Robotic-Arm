@@ -50,6 +50,10 @@ body {
     color: black;
 }
 
+#macro-button {
+    width: 30vw;
+}
+
 input {
     transition: 0.3s ease-in;
 }
