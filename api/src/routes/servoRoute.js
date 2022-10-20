@@ -5,13 +5,13 @@ const ServoController = require('../controllers/ServoController');
 
 router.use(bodyParser.json());
 
-router.get('/moveBottomServo', ServoController.moveBottomServo);
+router.get('/moveBottomServo/:degrees', ServoController.moveBottomServo);
 
-router.get('/moveRightServo', ServoController.moveRightServo);
+router.get('/moveRightServo/:degrees', ServoController.moveRightServo);
 
-router.get('/moveLeftServo', ServoController.moveLeftServo);
+router.get('/moveLeftServo/:degrees', ServoController.moveLeftServo);
 
-router.get('/moveTopServo', ServoController.moveTopServo);
+router.get('/moveTopServo/:degrees', ServoController.moveTopServo);
 
 router.get('/openClaw', ServoController.openClaw);
 

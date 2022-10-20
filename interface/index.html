@@ -18,24 +18,34 @@
         </div>
         <div class="row">
             <label class="form-label">Servo da Base</label>
-            <input type="range" class="form-range" min="0" max="180" onchange="changeServo('bottomServo', value)">
+            <input type="range" class="form-range" min="0" max="180" 
+            onchange="changeServoPosition('BottomServo', value)" oninput="changeServoValue('bottomServo', value)">
             <span id="bottomServoValue">90°</span>
         </div>
         <div class="row">
             <label class="form-label">Servo da Direita</label>
-            <input type="range" class="form-range" min="0" max="180" onchange="changeServo('rightServo', value)">
+            <input type="range" class="form-range" min="0" max="180" 
+            onchange="changeServoPosition('RightServo', value)" oninput="changeServoValue('rightServo', value)">
             <span id="rightServoValue">90°</span>
         </div>
         <div class="row">
             <label class="form-label">Servo da Esquerda</label>
-            <input type="range" class="form-range" min="0" max="180" onchange="changeServo('leftServo', value)">
+            <input type="range" class="form-range" min="0" max="180" 
+            onchange="changeServoPosition('LeftServo', value)" oninput="changeServoValue('leftServo', value)">
             <span id="leftServoValue">90°</span>
         </div>
         <div class="row">
             <label class="form-label">Servo da Garra</label>
-            <input type="range" class="form-range" min="0" max="180" onchange="changeServo('topServo', value)">
+            <input type="range" class="form-range" min="0" max="180" 
+            onchange="changeServoPosition('TopServo', value)" oninput="changeServoValue('topServo', value)">
             <span id="topServoValue">90°</span>
         </div>
+
+        <div>
+            <button type="button" class="btn btn-success btn-lg" onclick="claw('open')">Abrir Garra</button>
+            <button type="button" class="btn btn-danger btn-lg" onclick="claw('close')">Fechar Garra</button>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
