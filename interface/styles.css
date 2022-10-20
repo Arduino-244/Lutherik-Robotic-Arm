@@ -35,6 +35,7 @@ body {
 .title {
     font-weight: bold;
     text-align: center;
+    white-space: nowrap;
 }
 
 .subtitle {
@@ -42,6 +43,7 @@ body {
     text-align: center;
     font-size: 1rem;
     vertical-align: 1rem;
+    white-space: nowrap;
 }
 
 #tickmarks {
