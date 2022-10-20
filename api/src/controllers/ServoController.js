@@ -85,20 +85,24 @@ class ServoController {
     }
 
     stopRecording(req, res, next) {
+        console.log(macro)
         res.send('stopRecording')
         isRecording = false;
         let i = 0;
-        while (isRecording == false && macro.length > 0) {
-            i++;
-            let currentKey = macro[i]
-            if (currentKey) {
+        let macroSavedLength = macro.length
+        function moveServo() {
+            setTimeout(() => {
+                let currentKey = macro[i]
                 servoBottom.to(currentKey[0]);
                 servoRight.to(currentKey[1]);
                 servoLeft.to(currentKey[2]);
                 servoTop.to(currentKey[3]);
-                macro.pop();
-            }
+                i ++;
+                if (i > macroSavedLength) return;
+                moveServo();
+            }, 500);
         }
+        moveServo()
     }
 
     reset(req, res, next) {

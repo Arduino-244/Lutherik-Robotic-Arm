@@ -46,9 +46,9 @@ function recordMacro() {
     isRecording = !isRecording
 
     const macroButton = document.getElementById("macro-button");
-    macroButton.innerHTML = isRecording && 'Parar Macro' || 'Gravar Macro';
+    macroButton.innerHTML = isRecording ? 'Parar Macro' : 'Gravar Macro';
 
-    const url = `http://localhost:3000/${isRecording && 'startRecording' || 'stopRecording'}`;
+    const url = `http://localhost:3000/${isRecording ? 'startRecording' : 'stopRecording'}`;
     console.log(`URL: ${url}`)
 
     options = {
