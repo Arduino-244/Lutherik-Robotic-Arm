@@ -1,15 +1,15 @@
+const urlAPI = 'http://localhost:3000';
+const defaultFetchOptions = {
+    mode: 'no-cors'
+};
 let isRecording = false;
 
 function changeServoPosition(id, value) {
-    const url = `http://localhost:3000/move${id}/${value}`;
+    const url = `${urlAPI}/move${id}/${value}`;
     console.log(id, value);
     console.log(`URL: ${url}`)
 
-    options = {
-        mode: 'no-cors',
-    };
-
-    fetch(url, options).then(function (response) {console.log(response);});
+    fetch(url, defaultFetchOptions).then(response => console.log(response));
 }
 
 function changeServoValue(id, value) {
@@ -18,42 +18,31 @@ function changeServoValue(id, value) {
 }
 
 function claw(state) {
-    const url = `http://localhost:3000/${state}Claw`;
+    const url = `${urlAPI}/${state}Claw`;
     console.log(`${state}Claw`)
     console.log(`URL: ${url}`)
 
-    options = {
-        mode: 'no-cors',
-    };
-
-    fetch(url, options).then(function (response) {console.log(response);});
+    fetch(url, defaultFetchOptions).then(response => console.log(response));
 }
 
 function reset() {
-    const url = `http://localhost:3000/reset`;
+    const url = `${urlAPI}/reset`;
     console.log(`URL: ${url}`)
 
-    options = {
-        mode: 'no-cors',
-    };
-
-    window.location.reload()
-
-    fetch(url, options).then(function (response) {console.log(response);});
+    fetch(url, defaultFetchOptions).then(response => {
+        console.log(response);
+        window.location.reload();
+    });
 }
 
 function recordMacro() {
     isRecording = !isRecording
 
+    const url = `${urlAPI}/${isRecording ? 'startRecording' : 'stopRecording'}`;
+    console.log(`URL: ${url}`)
+
     const macroButton = document.getElementById("macro-button");
     macroButton.innerHTML = isRecording ? 'Parar Macro' : 'Gravar Macro';
 
-    const url = `http://localhost:3000/${isRecording ? 'startRecording' : 'stopRecording'}`;
-    console.log(`URL: ${url}`)
-
-    options = {
-        mode: 'no-cors',
-    };
-
-    fetch(url, options).then(function (response) {console.log(response);});
+    fetch(url, defaultFetchOptions).then(response => console.log(response));
 }

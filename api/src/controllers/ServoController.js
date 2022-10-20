@@ -1,4 +1,5 @@
-const five = require("johnny-five");
+const five = require('johnny-five');
+const clamp = require('./../util/clamp')
 const led = new five.Led(13);
 
 const servoBottom = new five.Servo(8);
@@ -8,109 +9,116 @@ const servoTop = new five.Servo(11);
 
 const servoReset = [ 90, 65, 90, 90 ];
 
-const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-
-const moveRightServo = async (degrees) => {
-    console.log(degrees);
-    servoRight.to(degrees);
-}
-
-const moveLeftServo = async (degrees) => {
-    console.log(degrees);
-    servoLeft.to(degrees);
-}
+const moveBottomServo = async degrees => servoBottom.to(degrees);
+const moveRightServo = async degrees => servoRight.to(degrees);
+const moveLeftServo = async degrees => servoLeft.to(degrees);
+const moveTopServo = async degrees => servoTop.to(degrees);
 
 let isRecording = false;
-let macro = [];
+let macro;
+let macroIndex;
+
+const recordMacroKey = () => {
+    if (!isRecording) return;
+    setTimeout(function() {
+        macro.push([servoBottom.position, servoRight.position, servoLeft.position, servoTop.position])
+        recordMacroKey();
+    }, 500)
+};
+
+const runMacro = () => {
+    setTimeout(() => {
+        let currentKey = macro[macroIndex]
+        servoBottom.to(currentKey[0]);
+        servoRight.to(currentKey[1]);
+        servoLeft.to(currentKey[2]);
+        servoTop.to(currentKey[3]);
+        macroIndex++;
+        if (macroIndex > macro.length) return;
+        runMacro();
+    }, 500);
+};
 
 class ServoController {
 
-    moveBottomServo(req, res, next) {
-        console.log('Bottom', req.params.degrees);
-        res.send('Bottom servo');
-        servoBottom.to(req.params.degrees)
+    moveBottomServo(req, res) {
+        const degrees = req.params.degrees;
+
+        moveBottomServo(degrees);
+
+        console.log('Bottom', degrees);
+        res.send(`Bottom servo to ${degrees}`);
     }
 
-    moveArmServo(req, res, next) {
-        console.log('Arm Servo', req.params.degrees);
-        res.send('Arm Servo');
-        const leftDegrees = req.params.degrees;
+    moveArmServo(req, res) {
+        const degrees = req.params.degrees;
+
+        const leftDegrees = degrees;
         const rightDegrees = clamp(180 - leftDegrees, 0,  180);
         moveRightServo(rightDegrees);
         moveLeftServo(leftDegrees);
+
+        console.log('Arm Servo', degrees);
+        res.send(`Arm servo to ${degrees}`);
     }
 
-    moveForearmServo(req, res, next) {
-        console.log('Forearm Servo', req.params.degrees);
-        res.send('Forearm Servo');
-        servoRight.to(req.params.degrees);
+    moveForearmServo(req, res) {
+        const degrees = req.params.degrees;
+
+        moveRightServo(degrees);
+
+        console.log('Forearm Servo', degrees);
+        res.send(`Forearm servo to ${degrees}`);
     }
 
-    moveTopServo(req, res, next) {
-        degrees = req.params.req.params.degrees;
-        res.send('Top servo');
-        servoTop.to(req.params.degrees);
+    moveTopServo(req, res) {
+        const degrees = req.params.degrees;
+
+        moveTopServo(degrees);
+
+        console.log('Top Servo', degrees);
+        res.send(`Top servo to ${degrees}`);
     }
 
-    openClaw(req, res, next) {
-        console.log('Open claw');
-        res.send('Open claw');
+    openClaw(req, res) {
         led.on();
         servoTop.max();
+
+        console.log('Open claw');
+        res.send('Open claw');
     }
 
-    closeClaw(req, res, next) {
-        console.log('Close claw');
-        res.send('Close claw');
+    closeClaw(req, res) {
         led.off();
         servoTop.min();
+
+        console.log('Close claw');
+        res.send('Close claw');
     }
 
-    startRecording(req, res, next) {
+    startRecording(req, res) {
         isRecording = true;
         macro = []
         
         res.send('startRecording')
 
-        function recordMacroKey() {
-            if (!isRecording) return;
-            setTimeout(function() {
-                macro.push([servoBottom.position, servoRight.position, servoLeft.position, servoTop.position])
-                recordMacroKey();
-            }, 500)
-        }
-
         recordMacroKey();
     }
 
-    stopRecording(req, res, next) {
+    stopRecording(req, res) {
         isRecording = false;
         
         res.send('stopRecording');
-
-        let index = 0;
-        function runMacro() {
-            setTimeout(() => {
-                let currentKey = macro[i]
-                servoBottom.to(currentKey[0]);
-                servoRight.to(currentKey[1]);
-                servoLeft.to(currentKey[2]);
-                servoTop.to(currentKey[3]);
-                index ++;
-                if index > macro.length) return;
-                runMacro();
-            }, 500);
-        }
-        
+        macroIndex = 0;
         runMacro();
     }
 
-    reset(req, res, next) {
+    reset(req, res) {
         res.send('Reset');
-        servoBottom.to(servoReset[0]);
-        servoRight.to(servoReset[1]);
-        servoLeft.to(servoReset[2]);
-        servoTop.to(servoReset[3]);
+        moveBottomServo(servoReset[0]);
+        moveRightServo(servoReset[1]);
+        moveLeftServo(servoReset[2]);
+        moveTopServo(servoReset[3]);
     }
 
 }

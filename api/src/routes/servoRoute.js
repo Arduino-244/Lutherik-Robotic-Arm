@@ -1,9 +1,6 @@
 const express = require('express');
+const ServoController = require('./../controllers/ServoController');
 const router = express.Router();
-const bodyParser = require('body-parser');
-const ServoController = require('../controllers/ServoController');
-
-router.use(bodyParser.json());
 
 router.get('/moveBottomServo/:degrees', ServoController.moveBottomServo);
 
