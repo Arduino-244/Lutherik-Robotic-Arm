@@ -39,25 +39,27 @@ class ServoController {
     moveForearmServo(req, res, next) {
         console.log('Forearm Servo', req.params.degrees);
         res.send('Forearm Servo');
-        moveRightServo(req.params.degrees);
+        servoRight.to(req.params.degrees);
     }
 
     moveTopServo(req, res, next) {
         degrees = req.params.req.params.degrees;
         res.send('Top servo');
+        servoTop.to(req.params.degrees);
     }
 
     openClaw(req, res, next) {
         console.log('Open claw');
         res.send('Open claw');
         led.on();
-
+        servoTop.max();
     }
 
     closeClaw(req, res, next) {
         console.log('Close claw');
         res.send('Close claw');
         led.off();
+        servoTop.min();
     }
 
 }
