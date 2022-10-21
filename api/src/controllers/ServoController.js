@@ -1,5 +1,5 @@
 const five = require('johnny-five');
-const clamp = require('./../util/clamp')
+const clamp = require('./../util/clamp');
 const led = new five.Led(13);
 
 const servoBottom = new five.Servo(8);
@@ -20,15 +20,15 @@ let macroIndex;
 
 const recordMacroKey = () => {
     if (!isRecording) return;
-    setTimeout(function() {
+    setTimeout(() => {
         macro.push([servoBottom.position, servoRight.position, servoLeft.position, servoTop.position])
         recordMacroKey();
-    }, 500)
+    }, 500);
 };
 
 const runMacro = () => {
     setTimeout(() => {
-        let currentKey = macro[macroIndex]
+        let currentKey = macro[macroIndex];
         servoBottom.to(currentKey[0]);
         servoRight.to(currentKey[1]);
         servoLeft.to(currentKey[2]);
@@ -98,9 +98,9 @@ class ServoController {
 
     startRecording(req, res) {
         isRecording = true;
-        macro = []
+        macro = [];
         
-        res.send('startRecording')
+        res.send('startRecording');
 
         recordMacroKey();
     }
