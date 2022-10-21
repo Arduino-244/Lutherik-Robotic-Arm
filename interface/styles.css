@@ -23,6 +23,21 @@ body {
     width: 30vw;
 }
 
+.servo-control-range {
+    width: 30vw;
+}
+
+.sweep-button-div {
+    display: flex;
+    align-items: center;
+}
+
+.sweep-button {
+    height: fit-content;
+    margin-bottom: 3vh;
+    margin-left: 0.5vw;
+}
+
 .form-label {
     font-weight: bold;
     height: 10%;

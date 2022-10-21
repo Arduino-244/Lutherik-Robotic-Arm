@@ -46,3 +46,16 @@ function recordMacro() {
 
     fetch(url, defaultFetchOptions).then(response => console.log(response));
 }
+
+function sweep(id) {
+    const sweepButton = document.querySelector(`#${id}Sweep`);
+    const servoRange = document.querySelector(`#${id}Range`);
+
+    if (sweepButton.classList.contains('fa-spin')) {
+        sweepButton.classList.remove('fa-spin');
+        servoRange.removeAttribute('disabled');
+    } else {
+        sweepButton.classList.add('fa-spin');
+        servoRange.setAttribute('disabled', '');
+    }
+}
