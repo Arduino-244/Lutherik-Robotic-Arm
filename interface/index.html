@@ -37,9 +37,9 @@
         <div class="d-flex">
             <div class="servo-control-range">
                 <label class="form-label">Servo do Braço</label>
-                <input type="range" class="form-range" min="0" max="130" id="armRange"
+                <input type="range" class="form-range" min="70" max="130" id="armRange"
                 onchange="changeServoPosition('ArmServo', value)" oninput="changeServoValue('armServo', value)">
-                <span id="armServoValue">65°</span>
+                <span id="armServoValue">100°</span>
             </div>
             <div class="sweep-button-div">
                 <button type="button" class="button btn btn-outline-secondary sweep-button" onclick="sweep('arm')">
@@ -51,9 +51,9 @@
         <div class="d-flex">
             <div class="servo-control-range">
                 <label class="form-label">Servo do Antebraço</label>
-                <input type="range" class="form-range" min="0" max="180" id="forearmRange"
+                <input type="range" class="form-range" min="100" max="180" id="forearmRange"
                 onchange="changeServoPosition('ForearmServo', value)" oninput="changeServoValue('forearmServo', value)">
-                <span id="forearmServoValue">90°</span>
+                <span id="forearmServoValue">140°</span>
             </div>
             <div class="sweep-button-div">
                 <button type="button" class="button btn btn-outline-secondary sweep-button" onclick="sweep('forearm')">
@@ -65,9 +65,9 @@
         <div class="d-flex">
             <div class="servo-control-range">
                 <label class="form-label">Servo da Garra</label>
-                <input type="range" class="form-range" min="0" max="180" id="topRange"
+                <input type="range" class="form-range" min="0" max="70" id="topRange"
                 onchange="changeServoPosition('TopServo', value)" oninput="changeServoValue('topServo', value)">
-                <span id="topServoValue">90°</span>
+                <span id="topServoValue">35°</span>
             </div>
             <div class="sweep-button-div">
                 <button type="button" class="button btn btn-outline-secondary sweep-button" onclick="sweep('top')">

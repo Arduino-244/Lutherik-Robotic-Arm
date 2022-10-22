@@ -23,6 +23,10 @@ function claw(state) {
     console.log(`URL: ${url}`)
 
     fetch(url, defaultFetchOptions).then(response => console.log(response));
+
+    const range = document.querySelector('#topRange');
+    state === 'open' ? range.value = 0 : range.value = 70;
+    state === 'open' ? changeServoValue('topServo', 0) : changeServoValue('topServo', 70);
 }
 
 function reset() {

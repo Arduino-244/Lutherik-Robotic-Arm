@@ -2,12 +2,28 @@ const five = require('johnny-five');
 const clamp = require('./../util/clamp');
 const led = new five.Led(13);
 
-const servoBottom = new five.Servo(8);
-const servoRight = new five.Servo(9);
-const servoLeft = new five.Servo(10);
-const servoTop = new five.Servo(11);
+const servoBottom = new five.Servo({
+    pin: 8,
+    range: [0, 180],
+    startAt: 90
+});
+const servoRight = new five.Servo({
+    pin: 9,
+    range: [0, 180],
+    startAt: 90
+});
+const servoLeft = new five.Servo({
+    pin: 10,
+    range: [0, 130],
+    startAt: 110
+});
+const servoTop = new five.Servo({
+    pin: 11,
+    range: [0, 70],
+    startAt: 35
+});
 
-const servoReset = [ 90, 65, 90, 90 ];
+const servoReset = [ 90, 90, 90, 35 ];
 
 const moveBottomServo = async degrees => servoBottom.to(degrees);
 const moveRightServo = async degrees => servoRight.to(degrees);
@@ -54,7 +70,7 @@ class ServoController {
         const degrees = req.params.degrees;
 
         const leftDegrees = degrees;
-        const rightDegrees = clamp(180 - leftDegrees, 0,  180);
+        const rightDegrees = clamp(130 - leftDegrees, 0,  130);
         moveRightServo(rightDegrees);
         moveLeftServo(leftDegrees);
 
@@ -82,7 +98,7 @@ class ServoController {
 
     openClaw(req, res) {
         led.on();
-        servoTop.max();
+        servoTop.min();
 
         console.log('Open claw');
         res.send('Open claw');
@@ -90,7 +106,7 @@ class ServoController {
 
     closeClaw(req, res) {
         led.off();
-        servoTop.min();
+        servoTop.max();
 
         console.log('Close claw');
         res.send('Close claw');
