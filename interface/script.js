@@ -55,11 +55,19 @@ function sweep(id) {
     const sweepButton = document.querySelector(`#${id}Sweep`);
     const servoRange = document.querySelector(`#${id}Range`);
 
+    let state = 'startSweeping';
+
     if (sweepButton.classList.contains('fa-spin')) {
         sweepButton.classList.remove('fa-spin');
         servoRange.removeAttribute('disabled');
+        state = 'stopSweeping'
     } else {
         sweepButton.classList.add('fa-spin');
         servoRange.setAttribute('disabled', '');
     }
+
+    const url = `${urlAPI}/${state}/${id}`;
+    console.log(`URL: ${url}`)
+
+    fetch(url, defaultFetchOptions).then(response => console.log(response));
 }
